@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Toshkentdagi ijara va sotuv e'lonlari bitta joyda: kvartira va hovli, tuman, xona, narx va boshqa filtrlar bilan.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Toshkent uy qidiruvi">
+<meta property="og:description" content="Toshkentdagi ijara va sotuv e'lonlari bitta joyda: kvartira va hovli, tuman, xona, narx va boshqa filtrlar bilan.">
+<meta property="og:url" content="https://behzodutkirov01.github.io/uy-qidiruv/">
+<meta property="og:image" content="https://behzodutkirov01.github.io/uy-qidiruv/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="uyq-cdn" content="https://cdn.jsdelivr.net/gh/behzodutkirov01/uy-qidiruv@">
+<meta name="theme-color" content="#0B6E7A" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1618" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B6E7A'/%3E%3Cpath d='M32 13 11 31h6v20h11V38h8v13h11V31h6z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;padding:0}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<title>Toshkent uy qidiruvi</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600;700&display=swap">
+<style>
+/* Layout: one tool column — two big mode switches, a filter panel with an expandable advanced part, then a hairline list where price leads each row. */
+:root{
+  --bg:#F2F6F6; --surface:#FFFFFF; --ink:#12262B; --muted:#586C71; --line:#D7E1E2;
+  --accent:#0B6E7A; --accent-ink:#FFFFFF; --accent-soft:#DCEEF0; --chip:#E8EEEE;
+  --ok:#1C7448; --ok-soft:#DDF1E4; --warn:#8F5400; --warn-soft:#FAE9CC; --star:#C98A00;
+  --display:"Unbounded","Golos Text",system-ui,sans-serif;
+  --body:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0D1618; --surface:#142124; --ink:#E5EEEE; --muted:#93A7AB; --line:#25393D;
+  --accent:#52C4D0; --accent-ink:#06272B; --accent-soft:#16393E; --chip:#1C2D31;
+  --ok:#6FD39B; --ok-soft:#143424; --warn:#F0B55A; --warn-soft:#3A2C12; --star:#F2C14E; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0D1618; --surface:#142124; --ink:#E5EEEE; --muted:#93A7AB; --line:#25393D;
+  --accent:#52C4D0; --accent-ink:#06272B; --accent-soft:#16393E; --chip:#1C2D31;
+  --ok:#6FD39B; --ok-soft:#143424; --warn:#F0B55A; --warn-soft:#3A2C12; --star:#F2C14E; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:16px;padding-block:24px 56px;display:flex;flex-direction:column;gap:18px}
+a{color:var(--accent)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+header{display:flex;flex-direction:column;gap:6px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(22px,4.2vw,32px);line-height:1.15;margin:0;letter-spacing:-.01em;text-wrap:balance}
+.lede{color:var(--muted);margin:0;max-width:70ch}
+.stamp{color:var(--muted);font-size:13.5px;font-variant-numeric:tabular-nums}
+.stamp b{color:var(--ink);font-weight:600}
+
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.switch{display:grid;grid-template-columns:1fr 1fr;background:var(--chip);border-radius:12px;padding:4px;gap:4px}
+.switch button{border:0;background:transparent;border-radius:9px;padding:11px 10px;font-weight:600;font-size:15.5px;cursor:pointer;color:var(--muted)}
+.switch button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+
+.filters{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:16px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px}
+.fg{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fg.w2{grid-column:span 2} .fg.w4{grid-column:1/-1}
+.cap{font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.cap button{border:0;background:none;color:var(--accent);cursor:pointer;padding:0;font-size:12px;letter-spacing:0;text-transform:none;font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer;white-space:nowrap}
+.chips button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+select,input[type=search],input[type=text]{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:7px 10px;width:100%;min-width:0}
+.range{display:flex;align-items:center;gap:8px}
+.range span{color:var(--muted)}
+.checks{display:flex;flex-wrap:wrap;gap:8px 24px}
+.check{display:flex;align-items:flex-start;gap:8px;cursor:pointer}
+.check input{margin-top:3px;accent-color:var(--accent);width:16px;height:16px;flex:none}
+details.more{border-top:1px solid var(--line);padding-top:12px}
+details.more > summary{cursor:pointer;font-weight:600;color:var(--accent);list-style:none;display:flex;align-items:center;gap:8px}
+details.more > summary::-webkit-details-marker{display:none}
+details.more > summary::before{content:"+";display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--accent-soft);font-weight:700;line-height:1}
+details.more[open] > summary::before{content:"–"}
+details.more .grid{margin-top:14px}
+.badge{font-size:12px;font-weight:600;background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:1px 8px}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px}
+.count{font-weight:600;font-variant-numeric:tabular-nums}
+.count small{font-weight:400;color:var(--muted);font-size:inherit}
+.bar-actions{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center}
+.link{border:0;background:none;color:var(--accent);cursor:pointer;padding:4px 0;text-decoration:underline}
+.pill{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;cursor:pointer;font-weight:500}
+.pill[aria-pressed="true"]{background:var(--star);border-color:var(--star);color:#1A1300}
+
+.list{list-style:none;margin:0;padding:0;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.row{display:grid;grid-template-columns:128px minmax(0,1fr) 36px;gap:4px 16px;padding:14px 16px;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.price{font-family:var(--display);font-weight:600;font-size:19px;line-height:1.15;font-variant-numeric:tabular-nums;white-space:nowrap}
+.price small{display:block;font-family:var(--body);font-weight:400;font-size:12.5px;color:var(--muted);margin-top:4px}
+.main{min-width:0;display:flex;flex-direction:column;gap:6px}
+.title{font-weight:600;font-size:15.5px;color:var(--ink);text-decoration:none;overflow-wrap:anywhere}
+.title:hover{text-decoration:underline;color:var(--accent)}
+.title:visited{color:var(--muted)}
+.facts{display:flex;flex-wrap:wrap;gap:4px 14px;color:var(--muted);font-size:13.5px;font-variant-numeric:tabular-nums}
+.facts b{color:var(--ink);font-weight:600}
+.snip{margin:0;color:var(--muted);font-size:13.5px;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:12px;font-weight:500;padding:2px 8px;border-radius:5px;background:var(--chip);white-space:nowrap}
+.tag.src{background:var(--accent-soft);color:var(--accent)}
+.tag.ok{background:var(--ok-soft);color:var(--ok)}
+.tag.warn{background:var(--warn-soft);color:var(--warn)}
+.fav{border:0;background:none;cursor:pointer;font-size:20px;line-height:1;color:var(--line);align-self:start;padding:2px;border-radius:6px}
+.fav[aria-pressed="true"]{color:var(--star)}
+.fav:hover{color:var(--star)}
+.empty{padding:36px 16px;text-align:center;color:var(--muted)}
+.warnbox{background:var(--warn-soft);color:var(--warn);border-radius:10px;padding:10px 14px}
+.warnbox .link{color:inherit;font-weight:600}
+.morebtn{font-weight:600;align-self:center;padding:10px 22px;border-radius:999px;border:1px solid var(--accent);background:var(--surface);color:var(--accent);cursor:pointer}
+
+.notes{color:var(--muted);font-size:13.5px;border-top:1px solid var(--line);padding-top:18px;display:flex;flex-direction:column;gap:8px}
+.notes h2{font-size:13px;letter-spacing:.07em;text-transform:uppercase;margin:0;color:var(--ink);font-weight:600}
+.notes ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;max-width:80ch}
+
+@media (max-width:860px){ .grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:540px){
+  .modes{grid-template-columns:minmax(0,1fr)}
+  .grid{grid-template-columns:minmax(0,1fr)} .fg.w2{grid-column:auto}
+  .row{grid-template-columns:minmax(0,1fr) 36px;gap:8px 10px}
+  .price{grid-column:1;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap} .price small{margin-top:0}
+  .main{grid-column:1/-1;grid-row:2} .fav{grid-column:2;grid-row:1}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Toshkent uy qidiruvi</h1>
+    <p class="lede">OLX.uz, Birbir.uz va Joymee.uz'dagi ijara va sotuv e'lonlari bitta joyda. Mezonlarni tanlang, ro'yxat darhol saralanadi.</p>
+    <div class="stamp" id="stamp">Ma'lumot yuklanmoqda…</div>
+  </header>
+
+  <div class="modes">
+    <div class="switch" id="m-deal" role="group" aria-label="Bitim turi"><button type="button" data-v="r" aria-pressed="true">Ijara</button><button type="button" data-v="s" aria-pressed="false">Sotuv</button></div>
+    <div class="switch" id="m-type" role="group" aria-label="Mulk turi"><button type="button" data-v="a" aria-pressed="true">Kvartira</button><button type="button" data-v="h" aria-pressed="false">Hovli / uy</button></div>
+  </div>
+
+  <section class="filters" aria-label="Filtrlar">
+    <div class="grid">
+      <div class="fg w4"><div class="cap"><span>Tuman</span><button type="button" id="dist-all">Hammasi</button></div><div class="chips" id="f-dist"></div></div>
+      <div class="fg"><div class="cap"><span>Xonalar</span></div><div class="chips" id="f-rooms"><button type="button" data-v="1" aria-pressed="false">1</button><button type="button" data-v="2" aria-pressed="false">2</button><button type="button" data-v="3" aria-pressed="false">3</button><button type="button" data-v="4" aria-pressed="false">4</button><button type="button" data-v="5" aria-pressed="false">5+</button></div></div>
+      <div class="fg"><label class="cap" for="f-pmin"><span id="cap-price">Narx, $</span></label><div class="range"><input type="text" inputmode="numeric" id="f-pmin" placeholder="dan" aria-label="Eng kam narx"><span>–</span><input type="text" inputmode="numeric" id="f-pmax" placeholder="gacha" aria-label="Eng ko'p narx"></div></div>
+      <div class="fg"><label class="cap" for="f-amin"><span>Maydon, m²</span></label><div class="range"><input type="text" inputmode="numeric" id="f-amin" placeholder="dan" aria-label="Eng kam maydon"><span>–</span><input type="text" inputmode="numeric" id="f-amax" placeholder="gacha" aria-label="Eng ko'p maydon"></div></div>
+      <div class="fg"><label class="cap" for="f-age"><span>E'lon sanasi</span></label><select id="f-age"><option value="0">Bugun</option><option value="3">So'nggi 3 kun</option><option value="7">So'nggi 7 kun</option><option value="30" selected>So'nggi 30 kun</option><option value="9999">Hammasi</option></select></div>
+      <div class="fg w2"><label class="cap" for="f-q"><span>Matn bo'yicha qidirish</span></label><input type="search" id="f-q" placeholder="masalan: novza, metro, 19 kvartal, новостройка"></div>
+      <div class="fg w2"><label class="cap" for="f-sort"><span>Tartib</span></label><select id="f-sort"><option value="new">Avval yangilari</option><option value="cheap">Avval arzonlari</option><option value="dear">Avval qimmatlari</option><option value="m2">1 m² narxi arzonlari</option><option value="big">Avval katta maydonlilar</option></select></div>
+    </div>
+
+    <details class="more" id="more-filters">
+      <summary>Qo'shimcha filtrlar <span class="badge" id="more-n" hidden></span></summary>
+      <div class="grid">
+        <div class="fg" data-for="a"><label class="cap" for="f-fmin"><span>Qavat</span></label><div class="range"><input type="text" inputmode="numeric" id="f-fmin" placeholder="dan" aria-label="Eng past qavat"><span>–</span><input type="text" inputmode="numeric" id="f-fmax" placeholder="gacha" aria-label="Eng yuqori qavat"></div></div>
+        <div class="fg" data-for="s"><label class="cap" for="f-mmin"><span>1 m² narxi, $</span></label><div class="range"><input type="text" inputmode="numeric" id="f-mmin" placeholder="dan" aria-label="1 m² eng kam narxi"><span>–</span><input type="text" inputmode="numeric" id="f-mmax" placeholder="gacha" aria-label="1 m² eng ko'p narxi"></div></div>
+        <div class="fg" data-for="h"><label class="cap" for="f-lmin"><span>Yer maydoni, sotix</span></label><div class="range"><input type="text" inputmode="decimal" id="f-lmin" placeholder="dan" aria-label="Eng kam yer"><span>–</span><input type="text" inputmode="decimal" id="f-lmax" placeholder="gacha" aria-label="Eng ko'p yer"></div></div>
+        <div class="fg"><label class="cap" for="f-who"><span>Kimdan</span></label><select id="f-who"><option value="">Hammasi</option><option value="p">Xususiy shaxs</option><option value="a">Agentlik / biznes</option></select></div>
+        <div class="fg w2"><div class="cap"><span>Ta'mir holati</span></div><div class="chips" id="f-rep"><button type="button" data-v="1" aria-pressed="false">Yevro / dizayn</button><button type="button" data-v="2" aria-pressed="false">O'rtacha</button><button type="button" data-v="3" aria-pressed="false">Ta'mirtalab</button><button type="button" data-v="4" aria-pressed="false">Qora suvoq</button></div></div>
+        <div class="fg w2"><div class="cap"><span>Sayt</span></div><div class="chips" id="f-src"><button type="button" data-v="o" aria-pressed="true">OLX</button><button type="button" data-v="b" aria-pressed="true">Birbir</button><button type="button" data-v="j" aria-pressed="true">Joymee</button></div></div>
+        <div class="fg w4"><div class="checks">
+          <label class="check" data-for="a"><input type="checkbox" id="c-nofirst"><span>1-qavat bo'lmasin</span></label>
+          <label class="check" data-for="a"><input type="checkbox" id="c-nolast"><span>Oxirgi qavat bo'lmasin</span></label>
+          <label class="check" data-for="r"><input type="checkbox" id="c-fam"><span>Faqat «oilaga» deb yozilganlar</span></label>
+          <label class="check" data-for="r"><input type="checkbox" id="c-kids"><span>«Bolasiz oilaga» sharti bo'lmasin</span></label>
+          <label class="check" data-for="r"><input type="checkbox" id="c-furn"><span>Mebelli (OLX belgisi)</span></label>
+          <label class="check"><input type="checkbox" id="c-nocom"><span>Vositachilik haqisiz (OLX belgisi)</span></label>
+          <label class="check" data-for="sa"><input type="checkbox" id="c-new"><span>Yangi bino (OLX belgisi)</span></label>
+          <label class="check" data-for="s"><input type="checkbox" id="c-mort"><span>Ipotekaga mumkin (Joymee belgisi)</span></label>
+        </div></div>
+      </div>
+    </details>
+  </section>
+
+  <div class="bar">
+    <div class="count" id="count" aria-live="polite"></div>
+    <div class="bar-actions">
+      <button type="button" class="pill" id="favonly" aria-pressed="false">★ Saqlanganlar <span id="favn"></span></button>
+      <button type="button" class="pill" id="share" hidden>Qidiruvni ulashish</button>
+      <button type="button" class="link" id="reset">Filtrlarni tozalash</button>
+    </div>
+  </div>
+
+  <div class="warnbox" id="warn" hidden><span id="warn-text"></span><button type="button" class="link" id="warn-retry">Qayta urinish</button></div>
+  <ul class="list" id="list"><li class="empty">E'lonlar yuklanmoqda…</li></ul>
+  <button type="button" class="morebtn" id="more" hidden>Yana ko'rsatish</button>
+
+  <section class="notes">
+    <h2>Bilib qo'ying</h2>
+    <ul>
+      <li>Baza kuniga bir marta yangilanadi. E'lon yopilgan yoki narxi o'zgargan bo'lishi mumkin, shuning uchun sarlavhani bosib asl e'lonni tekshiring.</li>
+      <li>Narxlar dollarda. So'mda yozilgan e'lonlar kun kursi bo'yicha o'girilgan (<span id="rate">1 $ ≈ 11 800 so'm</span>).</li>
+      <li>Xona, maydon, qavat va tuman e'lon egasi to'ldirgan ma'lumotdan olinadi. Ular bo'sh qoldirilgan e'lonlar shu filtrlardan birini yoqsangiz ro'yxatdan tushib qoladi.</li>
+      <li>«Oilaga» belgisi e'lon matnidagi so'zlardan aniqlanadi. «Xususiy shaxs» belgisi saytning o'z belgisi, uni vositachilar ham qo'yishi mumkin.</li>
+      <li>★ bilan saqlangan e'lonlar va tanlangan filtrlar faqat shu qurilmada, shu brauzerda eslab qolinadi.</li>
+      <li id="note-share" hidden>«Qidiruvni ulashish» tugmasi tanlangan filtrlar bilan havola beradi: uni ochgan odam xuddi shu ro'yxatni ko'radi. Saqlangan ★ e'lonlar havolaga kirmaydi.</li>
+    </ul>
+  </section>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var DIST = ['', 'Bektemir', 'Chilonzor', 'Mirobod', "Mirzo Ulug'bek", 'Olmazor', 'Sergeli', 'Shayxontohur', 'Uchtepa', 'Yakkasaroy', 'Yangihayot', 'Yashnobod', 'Yunusobod'];
+  var SRC = {o:'OLX', b:'Birbir', j:'Joymee'};
+  var REP = ['', 'Yevro / dizayn', "O'rtacha ta'mir", "Ta'mirtalab", 'Qora suvoq'];
+  var MON = ['yan','fev','mar','apr','may','iyn','iyl','avg','sen','okt','noy','dek'];
+  var FL = {AG:1, COM:2, NOCOM:4, FURN:8, FAM:16, NOKIDS:32, NEW:64, OTH:128, MORT:256};
+  var ID=0, D=1, R=2, P=3, A=4, F=5, FT=6, DAY=7, FLG=8, RP=9, PLOT=10, T=11, X=12;
+  var PAGE = 50;
+  var $ = function(id){ return document.getElementById(id); };
+  var store = {
+    get: function(k, d){ try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch(e){ return d; } },
+    set: function(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+  };
+
+  var META = null, CACHE = {}, FAILED = {}, LOADING = 0, shown = PAGE, loadSeq = 0;
+  var DEF = {deal:'r', type:'a', dist:[], rooms:[], pmin:'', pmax:'', amin:'', amax:'', age:'30', q:'', sort:'new', fmin:'', fmax:'', mmin:'', mmax:'', lmin:'', lmax:'', who:'', rep:[], src:['o','b','j'], nofirst:false, nolast:false, fam:false, kids:false, furn:false, nocom:false, isnew:false, mort:false, favonly:false};
+  /* A standalone copy of the page (not the embedded one) can carry the chosen filters in the link, after the # sign. */
+  var SOLO = (function(){ try { return window.top === window.self; } catch(e){ return false; } })();
+  var OK = {deal:['r','s'], type:['a','h'], age:['0','3','7','30','9999'], sort:['new','cheap','dear','m2','big'], who:['','p','a']};
+  function fromLink(){
+    var h = location.hash.replace(/^#/, ''); if (!h) return null;
+    var o = {}, any = false;
+    h.split('&').forEach(function(kv){
+      var i = kv.indexOf('='); if (i < 1) return;
+      var k = kv.slice(0, i), v; try { v = decodeURIComponent(kv.slice(i + 1)); } catch(e){ return; }
+      if (!Object.prototype.hasOwnProperty.call(DEF, k) || k === 'favonly') return;
+      var d = DEF[k];
+      if (Array.isArray(d)){
+        var arr = v === '' ? [] : v.split('.');
+        arr = k === 'src' ? arr.filter(function(x){ return x === 'o' || x === 'b' || x === 'j'; }) : arr.map(Number).filter(function(n){ return n > 0 && n < 20 && n === Math.floor(n); });
+        if (k === 'src' && !arr.length) return;
+        o[k] = arr;
+      } else if (typeof d === 'boolean') o[k] = v === '1';
+      else if (OK[k]){ if (OK[k].indexOf(v) < 0) return; o[k] = v; }
+      else o[k] = k === 'q' ? String(v).slice(0, 80) : String(v).replace(/[^\d.,]/g, '').slice(0, 12);
+      any = true;
+    });
+    return any ? o : null;
+  }
+  function linkNow(){
+    var p = [];
+    Object.keys(DEF).forEach(function(k){
+      if (k === 'favonly') return;
+      var v = S[k], d = DEF[k];
+      if (Array.isArray(d)){ var a = v.slice().sort().join('.'); if (a !== d.slice().sort().join('.')) p.push(k + '=' + encodeURIComponent(a)); }
+      else if (typeof d === 'boolean'){ if (v) p.push(k + '=1'); }
+      else if (String(v) !== d) p.push(k + '=' + encodeURIComponent(v));
+    });
+    return location.origin + location.pathname + (p.length ? '#' + p.join('&') : '');
+  }
+  var LINKED = SOLO ? fromLink() : null;
+  var S = Object.assign({}, DEF, LINKED || store.get('uyq-filters', {}));
+  ['dist','rooms','rep','src'].forEach(function(k){ S[k] = (Array.isArray(S[k]) ? S[k] : DEF[k]).slice(); });   // own copies, so DEF never changes
+  S.favonly = false;
+  if (LINKED){ store.set('uyq-filters', S); try { history.replaceState(null, '', location.pathname + location.search); } catch(e){} }
+  var FAV = store.get('uyq-fav', {});
+
+  function el(tag, cls, text){ var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function num(n){ return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+  function val(s){ var n = parseFloat(String(s).replace(/[^\d.,]/g, '').replace(',', '.')); return isNaN(n) ? null : n; }
+  function dayDate(day){ var d = new Date(Date.UTC(2026, 0, 1) + day * 864e5); return d; }
+  function when(age, day){
+    if (age <= 0) return 'bugun';
+    if (age === 1) return 'kecha';
+    if (age < 30) return age + ' kun oldin';
+    var d = dayDate(day); return d.getUTCDate() + '-' + MON[d.getUTCMonth()] + (d.getUTCFullYear() !== 2026 ? ' ' + d.getUTCFullYear() : '');
+  }
+  function urlOf(src, seg, id){
+    if (src === 'o') return 'https://www.olx.uz/d/obyavlenie/x-ID' + id + '.html';
+    if (src === 'j') return 'https://joymee.uz/announcements/' + id;
+    return 'https://birbir.uz/uz/toshkent/cat/kochmas-mulk/' + (seg[0] === 'r' ? 'ijara' : 'sotish') + '/' + (seg[1] === 'a' ? 'kvartiralar' : 'uylar') + '/o/x-' + id;
+  }
+
+  /* ---------- data ---------- */
+  function getJSON(url, tries){
+    tries = tries || 4;
+    return fetch(url, {cache: 'no-cache'}).then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); }).catch(function(e){
+      if (tries <= 1) throw e;
+      return new Promise(function(res){ setTimeout(res, 1200 * (5 - tries)); }).then(function(){ return getJSON(url, tries - 1); });
+    });
+  }
+  /* On the public site the big data files come from the jsDelivr mirror of the same GitHub repository (much faster in Uzbekistan
+     than github.io). cdn.json names the exact commit that holds this build's data, so the mirror's copy always matches.
+     Any failure falls back to this site's own copy. */
+  var CDN = (function(){ var m = document.querySelector('meta[name="uyq-cdn"]'); return m ? m.content : ''; })(), MIRROR = '';
+  function getQuick(url, ms){
+    var ctl = window.AbortController ? new AbortController() : null, timer = ctl ? setTimeout(function(){ ctl.abort(); }, ms) : 0;
+    return fetch(url, ctl ? {signal: ctl.signal, cache: 'no-cache'} : {cache: 'no-cache'}).then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function(j){ clearTimeout(timer); return j; }, function(e){ clearTimeout(timer); throw e; });
+  }
+  function getData(name){
+    if (!MIRROR) return getJSON('data/' + name);
+    return getQuick(MIRROR + 'data/' + name, 45000).catch(function(){ return getJSON('data/' + name); });
+  }
+  function seg(){ return S.deal + S.type; }
+  function loadFile(key){
+    if (CACHE[key]) return CACHE[key].promise;
+    var entry = CACHE[key] = {rows: null};
+    var src = key.split('-')[1], sg = key.split('-')[0], parts = [];
+    for (var i = 1; i <= (META.files[key].parts || 1); i++) parts.push(i);
+    entry.promise = Promise.all(parts.map(function(i){
+      return getData(key + '-' + i + '.json').then(function(j){ return j.rows; });
+    })).then(function(lists){
+      var rows = [].concat.apply([], lists);
+      rows.forEach(function(row){ row.src = src; row.seg = sg; });
+      entry.rows = rows; return rows;
+    }).catch(function(){ delete CACHE[key]; FAILED[key] = 1; return []; });
+    return entry.promise;
+  }
+  function ensure(){
+    var sg = seg(), my = ++loadSeq;
+    var keys = ['o','b','j'].map(function(s){ return sg + '-' + s; }).filter(function(k){ return META && META.files[k]; });
+    var pending = keys.filter(function(k){ return !CACHE[k] || !CACHE[k].rows; });
+    if (pending.length){
+      $('count').textContent = 'E\'lonlar yuklanmoqda…';
+      $('list').textContent = ''; $('list').appendChild(el('li', 'empty', 'E\'lonlar yuklanmoqda…')); $('more').hidden = true;
+    }
+    FAILED = {};
+    var left = function(){ return keys.filter(function(k){ return !(CACHE[k] && CACHE[k].rows) && !FAILED[k]; }).length; };
+    LOADING = left();
+    if (!LOADING){ render(); return; }
+    keys.forEach(function(k){ loadFile(k).then(function(){ if (my !== loadSeq) return; LOADING = left(); render(); }); });   // show each site's listings as soon as they arrive
+  }
+  function rowsNow(){
+    var sg = seg(), out = [];
+    ['o','b','j'].forEach(function(s){ var c = CACHE[sg + '-' + s]; if (c && c.rows && S.src.indexOf(s) >= 0) out = out.concat(c.rows); });
+    return out;
+  }
+
+  /* ---------- filtering ---------- */
+  function filtered(){
+    var today = META.today, age = +S.age;
+    var pmin = val(S.pmin), pmax = val(S.pmax), amin = val(S.amin), amax = val(S.amax), fmin = val(S.fmin), fmax = val(S.fmax), mmin = val(S.mmin), mmax = val(S.mmax), lmin = val(S.lmin), lmax = val(S.lmax);
+    var apt = S.type === 'a', rent = S.deal === 'r', sale = !rent;
+    var dist = S.dist, rooms = S.rooms, rep = S.rep, q = S.q.trim().toLowerCase();
+    var qs = q ? q.split(/\s+/) : null;
+    var rows = rowsNow().filter(function(r){
+      if (S.favonly) return !!FAV[r.src + r[ID]];
+      if (today - r[DAY] > age) return false;
+      if (dist.length && dist.indexOf(r[D]) < 0) return false;
+      if (rooms.length){ var rr = r[R] >= 5 ? 5 : r[R]; if (rooms.indexOf(rr) < 0) return false; }
+      if (pmin != null && r[P] < pmin) return false;
+      if (pmax != null && r[P] > pmax) return false;
+      if (amin != null && !(r[A] >= amin)) return false;
+      if (amax != null && !(r[A] > 0 && r[A] <= amax)) return false;
+      if (apt){
+        if (fmin != null && !(r[F] >= fmin)) return false;
+        if (fmax != null && !(r[F] > 0 && r[F] <= fmax)) return false;
+        if (S.nofirst && !(r[F] > 1)) return false;
+        if (S.nolast && !(r[F] > 0 && r[FT] > 0 && r[F] < r[FT])) return false;
+      } else {
+        if (lmin != null && !(r[PLOT] >= lmin)) return false;
+        if (lmax != null && !(r[PLOT] > 0 && r[PLOT] <= lmax)) return false;
+      }
+      if (sale && (mmin != null || mmax != null)){
+        if (!(r[A] > 0)) return false; var m2 = r[P] / r[A];
+        if (mmin != null && m2 < mmin) return false; if (mmax != null && m2 > mmax) return false;
+      }
+      if (rep.length && rep.indexOf(r[RP]) < 0) return false;
+      var f = r[FLG];
+      if (S.who === 'p' && (f & FL.AG)) return false;
+      if (S.who === 'a' && !(f & FL.AG)) return false;
+      if (S.nocom && !(f & FL.NOCOM)) return false;
+      if (rent){
+        if (S.fam && (!(f & FL.FAM) || (f & FL.OTH))) return false;
+        if (S.kids && (f & FL.NOKIDS)) return false;
+        if (S.furn && !(f & FL.FURN)) return false;
+      } else {
+        if (S.isnew && apt && !(f & FL.NEW)) return false;
+        if (S.mort && !(f & FL.MORT)) return false;
+      }
+      if (qs){ if (!r.hay) r.hay = (r[T] + ' ' + (r[X] || '') + ' ' + DIST[r[D]]).toLowerCase(); for (var i = 0; i < qs.length; i++) if (r.hay.indexOf(qs[i]) < 0) return false; }
+      return true;
+    });
+    var s = S.sort;
+    rows.sort(function(a, b){
+      if (s === 'cheap') return a[P] - b[P] || b[DAY] - a[DAY];
+      if (s === 'dear') return b[P] - a[P] || b[DAY] - a[DAY];
+      if (s === 'big') return (b[A] || 0) - (a[A] || 0) || b[DAY] - a[DAY];
+      if (s === 'm2'){ var x = a[A] > 0 ? a[P] / a[A] : Infinity, y = b[A] > 0 ? b[P] / b[A] : Infinity; return x - y || b[DAY] - a[DAY]; }
+      return b[DAY] - a[DAY] || a[P] - b[P];
+    });
+    return rows;
+  }
+
+  /* ---------- rendering ---------- */
+  function fact(parent, label, value){ var s = el('span'); s.appendChild(el('b', '', value)); s.appendChild(document.createTextNode(' ' + label)); parent.appendChild(s); }
+  function rowEl(r){
+    var rent = r.seg[0] === 'r', apt = r.seg[1] === 'a', f = r[FLG], key = r.src + r[ID];
+    var li = el('li', 'row');
+    var price = el('div', 'price', num(r[P]) + ' $');
+    if (rent) price.appendChild(el('small', '', 'oyiga'));
+    else if (r[A] > 0) price.appendChild(el('small', '', num(r[P] / r[A]) + ' $/m²'));
+    li.appendChild(price);
+    var main = el('div', 'main');
+    var a = el('a', 'title', r[T] || 'E\'lon'); a.href = urlOf(r.src, r.seg, r[ID]); a.target = '_blank'; a.rel = 'noopener noreferrer';
+    main.appendChild(a);
+    var facts = el('div', 'facts');
+    if (r[R] > 0) fact(facts, 'xona', r[R]);
+    if (r[A] > 0) fact(facts, 'm²', r[A]);
+    if (apt && r[F] > 0) fact(facts, 'qavat', r[FT] > 0 ? r[F] + '/' + r[FT] : r[F]);
+    if (!apt && r[PLOT] > 0) fact(facts, 'sotix yer', r[PLOT]);
+    if (!apt && r[FT] > 0) fact(facts, 'qavatli', r[FT]);
+    facts.appendChild(el('span', '', when(META.today - r[DAY], r[DAY])));
+    main.appendChild(facts);
+    if (r[X]) main.appendChild(el('p', 'snip', r[X]));
+    var tags = el('div', 'tags');
+    tags.appendChild(el('span', 'tag', r[D] ? DIST[r[D]] : 'Tuman ko\'rsatilmagan'));
+    tags.appendChild(el('span', 'tag src', SRC[r.src]));
+    if (r[RP]) tags.appendChild(el('span', 'tag', REP[r[RP]]));
+    if (rent && (f & FL.FAM) && !(f & FL.OTH)) tags.appendChild(el('span', 'tag ok', 'Oilaga'));
+    if (rent && (f & FL.NOKIDS)) tags.appendChild(el('span', 'tag warn', 'Bolasiz oilaga'));
+    if (rent && (f & FL.FURN)) tags.appendChild(el('span', 'tag', 'Mebelli'));
+    if (!rent && apt && (f & FL.NEW)) tags.appendChild(el('span', 'tag', 'Yangi bino'));
+    if (!rent && (f & FL.MORT)) tags.appendChild(el('span', 'tag ok', 'Ipoteka mumkin'));
+    tags.appendChild(el('span', 'tag', (f & FL.AG) ? 'Agentlik / biznes' : 'Xususiy shaxs'));
+    if (f & FL.COM) tags.appendChild(el('span', 'tag warn', 'Vositachilik haqi bor'));
+    if (f & FL.NOCOM) tags.appendChild(el('span', 'tag ok', 'Vositachilik haqisiz'));
+    main.appendChild(tags);
+    li.appendChild(main);
+    var fav = el('button', 'fav', '★'); fav.type = 'button'; fav.setAttribute('aria-pressed', FAV[key] ? 'true' : 'false'); fav.setAttribute('aria-label', 'E\'lonni saqlash'); fav.dataset.key = key;
+    li.appendChild(fav);
+    return li;
+  }
+  function render(){
+    if (!META) return;
+    var rows = filtered(), total = rowsNow().length;
+    var c = $('count'); c.textContent = num(rows.length) + ' ta e\'lon ';
+    c.appendChild(el('small', '', S.favonly ? 'saqlanganlar ichidan' : 'shu bo\'limdagi ' + num(total) + ' tadan'));
+    if (LOADING) c.appendChild(el('small', '', ' · qolganlari yuklanmoqda…'));
+    var list = $('list'); list.textContent = '';
+    if (!rows.length && LOADING) list.appendChild(el('li', 'empty', 'E\'lonlar yuklanmoqda…'));
+    else if (!rows.length) list.appendChild(el('li', 'empty', S.favonly ? 'Bu bo\'limda saqlangan e\'lon yo\'q. E\'lon yonidagi ★ belgisini bosing.' : 'Bu mezonlarga mos e\'lon topilmadi. Narx oralig\'ini kengaytiring, sanani «Hammasi» qiling yoki bir-ikkita filtrni olib tashlang.'));
+    var frag = document.createDocumentFragment();
+    rows.slice(0, shown).forEach(function(r){ frag.appendChild(rowEl(r)); });
+    list.appendChild(frag);
+    var more = $('more'); more.hidden = rows.length <= shown;
+    if (!more.hidden) more.textContent = 'Yana ' + Math.min(PAGE, rows.length - shown) + ' tasini ko\'rsatish';
+    var nf = Object.keys(FAV).length; $('favn').textContent = nf ? '(' + nf + ')' : '';
+    var bad = Object.keys(FAILED).map(function(k){ return SRC[k.split('-')[1]]; });
+    $('warn').hidden = !bad.length;
+    if (bad.length) $('warn-text').textContent = bad.join(', ') + ' e\'lonlari yuklanmadi. ';
+  }
+  function refresh(){ shown = PAGE; store.set('uyq-filters', S); syncContext(); render(); }
+
+  /* ---------- controls ---------- */
+  function syncContext(){
+    var deal = S.deal, type = S.type;
+    [].forEach.call(document.querySelectorAll('[data-for]'), function(e){
+      var f = e.dataset.for, ok = f === deal || f === type || f === deal + type;
+      e.hidden = !ok;
+    });
+    $('cap-price').textContent = deal === 'r' ? 'Oylik narx, $' : 'Narx, $';
+    var opt = $('f-sort').querySelector('[value="m2"]'); opt.hidden = deal === 'r'; if (deal === 'r' && S.sort === 'm2'){ S.sort = 'new'; $('f-sort').value = 'new'; }
+    var n = 0; ['fmin','fmax','mmin','mmax','lmin','lmax','who'].forEach(function(k){ if (S[k]) n++; });
+    ['nofirst','nolast','fam','kids','furn','nocom','isnew','mort'].forEach(function(k){ if (S[k]) n++; });
+    if (S.rep.length) n++; if (S.src.length < 3) n++;
+    $('more-n').hidden = !n; $('more-n').textContent = n;
+  }
+  function paint(){
+    [['m-deal','deal'],['m-type','type']].forEach(function(p){ [].forEach.call($(p[0]).children, function(b){ b.setAttribute('aria-pressed', b.dataset.v === S[p[1]] ? 'true' : 'false'); }); });
+    [['f-dist','dist',true],['f-rooms','rooms',true],['f-rep','rep',true],['f-src','src',false]].forEach(function(p){ [].forEach.call($(p[0]).children, function(b){ var v = p[2] ? +b.dataset.v : b.dataset.v; b.setAttribute('aria-pressed', S[p[1]].indexOf(v) >= 0 ? 'true' : 'false'); }); });
+    [['f-pmin','pmin'],['f-pmax','pmax'],['f-amin','amin'],['f-amax','amax'],['f-fmin','fmin'],['f-fmax','fmax'],['f-mmin','mmin'],['f-mmax','mmax'],['f-lmin','lmin'],['f-lmax','lmax'],['f-q','q'],['f-age','age'],['f-sort','sort'],['f-who','who']].forEach(function(p){ $(p[0]).value = S[p[1]]; });
+    [['c-nofirst','nofirst'],['c-nolast','nolast'],['c-fam','fam'],['c-kids','kids'],['c-furn','furn'],['c-nocom','nocom'],['c-new','isnew'],['c-mort','mort']].forEach(function(p){ $(p[0]).checked = !!S[p[1]]; });
+    $('favonly').setAttribute('aria-pressed', S.favonly ? 'true' : 'false');
+  }
+  DIST.forEach(function(name, i){ if (!i) return; var b = el('button', '', name); b.type = 'button'; b.dataset.v = i; b.setAttribute('aria-pressed', 'false'); $('f-dist').appendChild(b); });
+
+  function single(id, key){ $(id).addEventListener('click', function(e){ var b = e.target.closest('button'); if (!b || S[key] === b.dataset.v) return; S[key] = b.dataset.v; paint(); shown = PAGE; store.set('uyq-filters', S); syncContext(); ensure(); }); }
+  single('m-deal', 'deal'); single('m-type', 'type');
+  function multi(id, key, numeric){ $(id).addEventListener('click', function(e){ var b = e.target.closest('button'); if (!b) return; var v = numeric ? +b.dataset.v : b.dataset.v, i = S[key].indexOf(v); if (i >= 0) S[key].splice(i, 1); else S[key].push(v); paint(); refresh(); }); }
+  multi('f-dist', 'dist', true); multi('f-rooms', 'rooms', true); multi('f-rep', 'rep', true); multi('f-src', 'src', false);
+  $('dist-all').addEventListener('click', function(){ S.dist = []; paint(); refresh(); });
+  [['f-pmin','pmin'],['f-pmax','pmax'],['f-amin','amin'],['f-amax','amax'],['f-fmin','fmin'],['f-fmax','fmax'],['f-mmin','mmin'],['f-mmax','mmax'],['f-lmin','lmin'],['f-lmax','lmax'],['f-q','q'],['f-age','age'],['f-sort','sort'],['f-who','who']].forEach(function(p){ $(p[0]).addEventListener('input', function(){ S[p[1]] = this.value; refresh(); }); });
+  [['c-nofirst','nofirst'],['c-nolast','nolast'],['c-fam','fam'],['c-kids','kids'],['c-furn','furn'],['c-nocom','nocom'],['c-new','isnew'],['c-mort','mort']].forEach(function(p){ $(p[0]).addEventListener('change', function(){ S[p[1]] = this.checked; refresh(); }); });
+  $('favonly').addEventListener('click', function(){ S.favonly = !S.favonly; paint(); shown = PAGE; render(); });
+  $('reset').addEventListener('click', function(){ var keep = {deal: S.deal, type: S.type}; S = Object.assign({}, DEF, keep); S.dist = []; S.rooms = []; S.rep = []; S.src = ['o','b','j']; paint(); refresh(); });
+  $('more').addEventListener('click', function(){ shown += PAGE; render(); });
+  $('list').addEventListener('click', function(e){ var b = e.target.closest('.fav'); if (!b) return; var k = b.dataset.key; if (FAV[k]) delete FAV[k]; else FAV[k] = 1; store.set('uyq-fav', FAV); b.setAttribute('aria-pressed', FAV[k] ? 'true' : 'false'); var nf = Object.keys(FAV).length; $('favn').textContent = nf ? '(' + nf + ')' : ''; });
+
+  if (SOLO){
+    window.addEventListener('hashchange', function(){ if (fromLink()) location.reload(); });   // a shared link opened in a tab where the page is already open
+    $('share').hidden = false; $('note-share').hidden = false;
+    var shareT = 0;
+    var flash = function(text){ var b = $('share'); b.textContent = text; clearTimeout(shareT); shareT = setTimeout(function(){ b.textContent = 'Qidiruvni ulashish'; }, 2200); };
+    var copy = function(url){
+      var done = function(){ flash('Havola nusxalandi ✓'); };
+      var old = function(){ var t = document.createElement('textarea'); t.value = url; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0'; document.body.appendChild(t); t.select(); var ok = false; try { ok = document.execCommand('copy'); } catch(e){} t.remove(); if (ok) done(); else flash('Nusxalab bo\'lmadi'); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, old); else old();
+    };
+    $('share').addEventListener('click', function(){
+      var url = linkNow(), touch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+      if (touch && navigator.share) navigator.share({title: 'Toshkent uy qidiruvi', url: url}).catch(function(e){ if (!e || e.name !== 'AbortError') copy(url); });
+      else copy(url);
+    });
+  }
+  paint(); syncContext();
+  if (LINKED && !$('more-n').hidden) $('more-filters').open = true;
+  function boot(){
+    $('stamp').textContent = 'Ma\'lumot yuklanmoqda…';
+    getJSON('data/meta.json').then(function(m){
+      if (!(SOLO && CDN)) return m;
+      return getQuick('cdn.json', 5000).then(function(c){
+        if (c && /^[0-9a-f]{40}$/.test(c.sha || '') && c.updated === m.updated) MIRROR = CDN + c.sha + '/';
+        return m;
+      }, function(){ return m; });
+    }).then(function(m){
+      META = m;
+      var parts = m.updated.match(/(\d+)-(\d+)-(\d+)T(\d+):(\d+)/);
+      var st = $('stamp'); st.textContent = '';
+      st.appendChild(document.createTextNode('Yangilangan: '));
+      st.appendChild(el('b', '', (+parts[3]) + '-' + MON[+parts[2] - 1] + ', ' + parts[4] + ':' + parts[5]));
+      st.appendChild(document.createTextNode(' · bazada '));
+      st.appendChild(el('b', '', num(m.total)));
+      st.appendChild(document.createTextNode(' ta e\'lon (OLX ' + num(m.bySrc.o || 0) + ', Joymee ' + num(m.bySrc.j || 0) + ', Birbir ' + num(m.bySrc.b || 0) + ')'));
+      if (m.rate) $('rate').textContent = '1 $ ≈ ' + num(m.rate) + ' so\'m';
+      ensure();
+    }).catch(function(){
+      var st = $('stamp'); st.textContent = 'Ma\'lumotni yuklab bo\'lmadi. ';
+      var b = el('button', 'link', 'Qayta urinish'); b.type = 'button'; b.addEventListener('click', boot); st.appendChild(b);
+      $('count').textContent = ''; $('list').textContent = ''; $('list').appendChild(el('li', 'empty', 'Ma\'lumotni yuklab bo\'lmadi. Internetni tekshirib, «Qayta urinish»ni bosing.'));
+    });
+  }
+  $('warn-retry').addEventListener('click', ensure);
+  boot();
+})();
+</script>
+</body>
+</html>
